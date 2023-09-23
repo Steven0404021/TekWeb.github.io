@@ -1,0 +1,102 @@
+
+<p>nama    : Steven Aleuntian Patty</p>
+<p>Nim     : 2215101021</p>
+kelas   : Ilkom A
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Fibonacci & Bangun Ruang</title>
+    <style>
+        body{
+            background-color: rgb(0, 238, 255);
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: rgb(51, 255, 0);
+            color: hsl(0, 0%, 1%);
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Deret Fibonacci</h1>
+        <p>Masukkan n untuk menghitung n angka pertama dalam deret Fibonacci:</p>
+        <input type="number" id="fibonacciInput" placeholder="Angka Valid">
+        <button onclick="hitungFibonacci()">Hitung</button>
+        <p>Hasil:</p>
+    <div id="hasilFibonacci"></div>
+    <br><br>
+    <br><br>
+    <h2>Volume Bangun Ruang</h2>
+        <label for="shape">Pilih jenis bangun ruang:</label>
+        <select id="shape">
+            <option value="kubus">Kubus</option>
+            <option value="bola">Bola</option>
+        </select>
+    <br><br>
+        <input type="number" id="input1" placeholder="Angka">
+        <button onclick="cariVolume()">Hitung Volume</button>
+        <div id="volumeResult"></div>
+    </div>
+
+    <script>
+        function hitungFibonacci() {
+            const n = parseInt(document.getElementById("fibonacciInput").value);
+            let a = 0, b = 1;
+            let hasil = [];
+            for (let i = 0; i < n; i++) {
+                hasil.push(a);
+                const temp = a + b;
+                a = b;
+                b = temp;
+            }
+            document.getElementById("hasilFibonacci").innerText = hasil.join(', ');
+        }
+
+        function cariVolume(){
+            const shapeSelect = document.getElementById('shape');
+            const input1 =  parseFloat(document.getElementById('input1').value);
+
+            const volumeResult = document.getElementById('volumeResult');
+            const selectedShape = shapeSelect.value;
+
+            if (isNaN(input1)){
+                volumeResult.textContent = 'masukkan angka.';
+                return;
+            }
+
+            let volume;
+
+            switch (selectedShape) {
+                case 'kubus':
+                    volume = input1 ** 3;
+                    break;
+                case 'bola':
+                    volume = (4 / 3) * Math.PI * (input1 ** 3);
+                    break;
+                default:
+                    volume = 0;
+                    break;
+            }
+            volumeResult.textContent = `Volume: ${volume.toFixed(1)}`;
+        }
+    </script>
+</body>
+</html>
